@@ -5,9 +5,12 @@ struct TrainView: View {
     @State private var newWord = ""
 
     var body: some View {
-        HSplitView {
+        // Not HSplitView: it sizes panes from their ideal widths, not the window's, so long
+        // text makes the content wider than the window and clips both edges.
+        HStack(spacing: 0) {
             vocabulary
-                .frame(minWidth: 200, idealWidth: 220, maxWidth: 280)
+                .frame(width: 220)
+            Divider()
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     capturePanel
@@ -16,7 +19,7 @@ struct TrainView: View {
                 }
                 .padding(20)
             }
-            .frame(minWidth: 520)
+            .frame(maxWidth: .infinity)
         }
     }
 
